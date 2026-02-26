@@ -1,0 +1,11 @@
+.likeButton {
+  padding: 8px 12px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  &__count {
+    margin-left: 8px;
+  }
+}

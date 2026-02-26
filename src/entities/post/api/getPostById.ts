@@ -1,7 +1,7 @@
 import { Post } from "../model/types";
 
 export async function getPostById(id: string): Promise<Post | null> {
-  const res = await fetch("https://localhost:3000/api/posts", {
+  const res = await fetch("http://localhost:3000/api/posts", {
     cache: "no-cache",
   });
 
