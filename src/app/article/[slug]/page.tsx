@@ -1,0 +1,39 @@
+import { getArticleBySlug } from "@/entities/article/model/selectors";
+import { notFound } from "next/navigation";
+import styles from "./page.module.scss";
+import type { PageProps } from "./types";
+
+export default async function ArticlePage({ params }: PageProps) {
+  const { slug } = await params;
+
+  const article = getArticleBySlug(slug);
+
+  if (!article) {
+    notFound();
+  }
+
+  return (
+    <main className={styles.articleSlug}>
+      <article className={styles.articleSlug__article}>
+        <h1 className={styles.articleSlug__title}>{article.title}</h1>
+        <div className={styles.articleSlug__meta}>
+          {article.author}{" "}
+          {new Date(article.createdAt).toLocaleDateString("ru-RU")}
+        </div>
+        <div className={styles.articleSlug__tags}>
+          {article.tags.map((tag) => (
+            <span key={tag} className={styles.articleSlug__tag}>
+              #{tag}
+            </span>
+          ))}
+        </div>
+        <section className={styles.articleSlug__content}>
+          <p>
+            Здесь позже будет полноценный контент статьи, который мы будем
+            хранить в данных или получать из API.
+          </p>
+        </section>
+      </article>
+    </main>
+  );
+}
