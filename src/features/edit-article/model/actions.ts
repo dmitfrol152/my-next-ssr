@@ -3,7 +3,7 @@
 import { mockArticles } from "@/entities/article/model/mock";
 import { redirect } from "next/navigation";
 
-export async function createArticleAction(formData: FormData) {
+export async function editArticleForm(id: string, formData: FormData) {
   const title = String(formData.get("title") || "");
   const description = String(formData.get("description") || "");
   const tagsRaw = String(formData.get("tags") || "");
@@ -17,17 +17,21 @@ export async function createArticleAction(formData: FormData) {
     .map((item) => item.trim())
     .filter((item) => Boolean(item));
 
-  const newArticle = {
-    id: String(Date.now()),
+  const index = mockArticles.findIndex((item) => item.id === id);
+
+  if (index === -1) {
+    return new Error("Статья не найдена");
+  }
+
+  const oldArticle = mockArticles[index];
+
+  const editMockArticle = (mockArticles[index] = {
+    ...oldArticle,
     title,
     description,
-    slug: title.toLowerCase().replace(/\s+/g, "-"),
-    author: "Dmitry Dev",
-    createdAt: new Date().toISOString(),
     tags,
-  };
+    slug: title.toLowerCase().replace(/\s+/g, "-"),
+  });
 
-  mockArticles.unshift(newArticle);
-
-  redirect(`/article/${encodeURIComponent(newArticle.slug)}`);
+  redirect(`/article/${encodeURIComponent(mockArticles[index].slug)}`);
 }

@@ -1,5 +1,5 @@
 export type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };

@@ -1,0 +1,11 @@
+.editPage {
+  padding: 40px;
+  max-width: 720px;
+  margin: 0 auto;
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+}

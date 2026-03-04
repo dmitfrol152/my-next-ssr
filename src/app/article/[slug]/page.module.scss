@@ -39,4 +39,20 @@
     line-height: 1.6;
     color: #444;
   }
+
+  &__editLink {
+    font-size: 14px;
+    color: #1a4fbf;
+    text-decoration: none;
+  }
+
+  &__editLink:hover {
+    text-decoration: underline;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
 }

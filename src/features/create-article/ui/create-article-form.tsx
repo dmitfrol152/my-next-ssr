@@ -8,18 +8,29 @@ export function CreateArticleForm() {
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
-    setError(null);
+    const resultCreate = await createArticleAction(formData);
 
-    try {
-      await createArticleAction(formData);
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Ошибка отправки формы");
-      }
+    if (resultCreate instanceof Error) {
+      setError(resultCreate.message);
+      return;
     }
+
+    setError(null);
   }
+
+  // async function handleSubmit(formData: FormData) {
+  //   setError(null);
+
+  //   try {
+  //     await createArticleAction(formData);
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       setError(error.message);
+  //     } else {
+  //       setError("Ошибка отправки формы");
+  //     }
+  //   }
+  // }
 
   return (
     <form action={handleSubmit} className={styles.createArticleForm}>

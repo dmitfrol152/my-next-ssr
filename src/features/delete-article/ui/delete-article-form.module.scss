@@ -1,0 +1,24 @@
+.deleteArticle {
+  margin-top: 16px;
+
+  &__button {
+    padding: 8px 14px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  &__button:hover {
+    background: #c9302c;
+  }
+
+  &__error {
+    margin-bottom: 8px;
+    padding: 8px;
+    background: #ffe5e5;
+    color: #b30000;
+    border-radius: 6px;
+  }
+}
