@@ -1,11 +1,11 @@
 "use client";
 
-import { Article } from "@/entities/article/model/types";
 import { useState } from "react";
 import { editArticleForm } from "../model/actions";
 import styles from "./edit-article-form.module.scss";
+import { JsonplaceholderType } from "@/shared/api/model/types";
 
-export function EditArticleForm({ article }: { article: Article }) {
+export function EditArticleForm({ article }: { article: JsonplaceholderType }) {
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
@@ -13,54 +13,29 @@ export function EditArticleForm({ article }: { article: Article }) {
 
     if (resultEdit instanceof Error) {
       setError(resultEdit.message);
-      return;
+    } else {
+      setError(null);
     }
-
-    setError(null);
-
-    // router.push(`/article/${encodeURIComponent(resultEdit.slug)}`);
-    // if (resultEdit.status)
-
-    // } catch (error) {
-    //   if (error instanceof Error) {
-    //     setError(error.message);
-    //   } else {
-    //     setError("Ошибка отправки формы");
-    //   }
-    // }
-    // redirect(`/article/${encodeURIComponent(resultEdit.slug)}`);
   }
 
   return (
-    <form action={handleSubmit} className={styles.editArticle}>
-      {error && <div className={styles.editArticle__error}>{error}</div>}
-      <label className={styles.editArticle__label}>
-        Название
+    <div className={styles.editArticle}>
+      {error && <span className={styles.editArticle__error}>{error}</span>}
+      <form className={styles.editArticle__label} action={handleSubmit}>
         <input
+          className={styles.editArticle__input}
           name="title"
           defaultValue={article.title}
-          className={styles.editArticle__input}
         />
-      </label>
-      <label className={styles.editArticle__label}>
-        Описание
         <textarea
-          name="description"
-          defaultValue={article.description}
           className={styles.editArticle__textarea}
+          name="description"
+          defaultValue={article.body}
         />
-      </label>
-      <label className={styles.editArticle__label}>
-        Теги (через запятую)
-        <input
-          name="tags"
-          defaultValue={article.tags.join(", ")}
-          className={styles.editArticle__input}
-        />
-      </label>
-      <button type="submit" className={styles.editArticle__button}>
-        Сохранить изменения
-      </button>
-    </form>
+        <button className={styles.editArticle__button} type="submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
   );
 }

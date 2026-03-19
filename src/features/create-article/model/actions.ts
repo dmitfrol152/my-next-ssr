@@ -1,33 +1,17 @@
 "use server";
 
-import { mockArticles } from "@/entities/article/model/mock";
+import { createPost } from "@/shared/api/jsonplaceholder";
 import { redirect } from "next/navigation";
 
 export async function createArticleAction(formData: FormData) {
-  const title = String(formData.get("title") || "");
-  const description = String(formData.get("description") || "");
-  const tagsRaw = String(formData.get("tags") || "");
+  const title = formData.get("title")?.toString() || "Без названия";
+  const body = formData.get("description")?.toString() || "Без описания";
 
-  if (!title.trim()) {
-    return new Error("Название обязательно");
+  try {
+    await createPost({ id: Date.now(), title, body });
+  } catch (error) {
+    return error;
   }
 
-  const tags = tagsRaw
-    .split(",")
-    .map((item) => item.trim())
-    .filter((item) => Boolean(item));
-
-  const newArticle = {
-    id: String(Date.now()),
-    title,
-    description,
-    slug: title.toLowerCase().replace(/\s+/g, "-"),
-    author: "Dmitry Dev",
-    createdAt: new Date().toISOString(),
-    tags,
-  };
-
-  mockArticles.unshift(newArticle);
-
-  redirect(`/article/${encodeURIComponent(newArticle.slug)}`);
+  redirect(`/dashboard`);
 }

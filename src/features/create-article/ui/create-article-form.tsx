@@ -8,55 +8,35 @@ export function CreateArticleForm() {
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
-    const resultCreate = await createArticleAction(formData);
+    const resultEdit = await createArticleAction(formData);
 
-    if (resultCreate instanceof Error) {
-      setError(resultCreate.message);
-      return;
+    if (resultEdit instanceof Error) {
+      setError(resultEdit.message);
+    } else {
+      setError(null);
     }
-
-    setError(null);
   }
 
-  // async function handleSubmit(formData: FormData) {
-  //   setError(null);
-
-  //   try {
-  //     await createArticleAction(formData);
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //       setError(error.message);
-  //     } else {
-  //       setError("Ошибка отправки формы");
-  //     }
-  //   }
-  // }
-
   return (
-    <form action={handleSubmit} className={styles.createArticleForm}>
-      {error && <div className={styles.createArticleForm__error}>{error}</div>}
-
-      <label className={styles.createArticleForm__label}>
-        Название
-        <input name="title" className={styles.createArticleForm__input} />
-      </label>
-
-      <label className={styles.createArticleForm__label}>
-        Описание
-        <textarea
-          name="description"
-          className={styles.createArticleForm__textarea}
+    <div className={styles.createArticleForm}>
+      {error && (
+        <span className={styles.createArticleForm__error}>{error}</span>
+      )}
+      <form className={styles.createArticleForm__label} action={handleSubmit}>
+        <input
+          className={styles.createArticleForm__input}
+          name="title"
+          placeholder="Название"
         />
-      </label>
-
-      <label className={styles.createArticleForm__label}>
-        Теги (через запятую)
-        <input name="tags" className={styles.createArticleForm__input} />
-      </label>
-
-      <button type="submit" className={styles.createArticleForm__button}>
-        Создать статью
-      </button>
-    </form>
+        <textarea
+          className={styles.createArticleForm__textarea}
+          name="description"
+          placeholder="Описание"
+        />
+        <button className={styles.createArticleForm__button} type="submit">
+          Создать
+        </button>
+      </form>
+    </div>
   );
 }

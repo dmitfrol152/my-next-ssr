@@ -1,27 +1,16 @@
 import { ArticleList } from "@/widgets/article-list/ui/article-list";
 import styles from "./page.module.scss";
-import { mockArticles } from "@/entities/article/model/mock";
 import { TrendingBlock } from "@/widgets/trending-block/ui/trending-block";
+import { getDevArticlesAll } from "@/shared/api/devto";
 
-export default function HomePage() {
-  const articles = mockArticles;
+export default async function HomePage() {
+  const articles = await getDevArticlesAll();
 
   return (
     <main className={styles.homePage}>
-      <section className={styles.homePage__hero}>
-        <h1 className={styles.homePage__title}>DevLog Hub</h1>
-        <p className={styles.homePage__subtitle}>
-          Платформа статей и заметок для разработчиков с SSR, формами и
-          публичными API.
-        </p>
-      </section>
-      <section className={styles.homePage__section}>
-        <h2 className={styles.homePage__sectionTitle}>Последние статьи</h2>
-        <ArticleList articles={articles} />
-      </section>
-      <section className={styles.homePage__section}>
-        <TrendingBlock />
-      </section>
+      <h1>DevLog Hub</h1>
+      <ArticleList articles={articles} />
+      <TrendingBlock />
     </main>
   );
 }

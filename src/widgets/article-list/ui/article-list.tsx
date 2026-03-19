@@ -8,17 +8,16 @@ export function ArticleList({ articles }: Props) {
       {articles.map((article) => (
         <article key={article.id} className={styles.articleList__item}>
           <h3 className={styles.articleList__title}>
-            <Link href={`/article/${article.slug}`}>{article.title}</Link>
+            <Link href={`/article/${article.id}`}>{article.title}</Link>
           </h3>
           <div className={styles.articleList__meta}>
-            {article.author}{" "}
-            {new Date(article.createdAt).toLocaleDateString("ru-RU")}
+            {new Date(article.published_timestamp).toLocaleDateString("ru-RU")}
           </div>
           <p className={styles.articleList__description}>
             {article.description}
           </p>
           <div className={styles.articleList__tags}>
-            {article.tags.map((tag) => (
+            {article.tag_list.map((tag) => (
               <span key={tag} className={styles.articleList__tag}>
                 #{tag}
               </span>

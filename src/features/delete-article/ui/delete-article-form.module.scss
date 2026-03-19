@@ -1,24 +1,25 @@
 .deleteArticle {
-  margin-top: 16px;
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
 
   &__button {
-    padding: 8px 14px;
+    padding: var(--space-s) var(--space-m);
     background: #d9534f;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-  }
 
-  &__button:hover {
-    background: #c9302c;
+    &:hover {
+      background: #c9302c;
+    }
   }
 
   &__error {
-    margin-bottom: 8px;
-    padding: 8px;
+    margin-bottom: var(--space-s);
+    padding: var(--space-s);
     background: #ffe5e5;
     color: #b30000;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
   }
 }

@@ -1,17 +1,14 @@
 "use server";
 
-import { mockArticles } from "@/entities/article/model/mock";
-import { revalidatePath } from "next/cache";
+import { deletePost } from "@/shared/api/jsonplaceholder";
 import { redirect } from "next/navigation";
 
-export async function deleteArticle(id: string) {
-  const finedIndex = mockArticles.findIndex((item) => item.id === id);
-
-  if (finedIndex === -1) {
-    return new Error("Не найдено");
+export async function deleteArticle(id: number) {
+  try {
+    await deletePost(id);
+  } catch (error) {
+    return error;
   }
 
-  mockArticles.splice(finedIndex, 1);
-
-  redirect("/");
+  redirect(`/dashboard`);
 }

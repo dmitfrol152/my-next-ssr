@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./delete-article-form.module.scss";
 import { deleteArticle } from "../model/actions";
 
-export function DeleteArticleFrom({ id }: { id: string }) {
+export function DeleteArticleFrom({ id }: { id: number }) {
   const [error, setError] = useState<string | null>(null);
 
   async function handleDelete() {

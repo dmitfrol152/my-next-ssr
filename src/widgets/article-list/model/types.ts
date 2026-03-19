@@ -1,3 +1,3 @@
-import { Article } from "@/entities/article/model/types";
+import { DevTypes } from "@/shared/api/model/types";
 
-export type Props = { articles: Article[] };
+export type Props = { articles: DevTypes[] };

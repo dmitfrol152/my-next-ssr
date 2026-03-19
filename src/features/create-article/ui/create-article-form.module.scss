@@ -1,46 +1,46 @@
 .createArticleForm {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-m);
 
   &__label {
     display: flex;
     flex-direction: column;
+    gap: var(--space-s);
     font-size: 14px;
-    gap: 4px;
   }
 
   &__input,
   &__textarea {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: var(--space-s) var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     font-size: 14px;
+    font-family: var(--font-main);
   }
 
   &__textarea {
-    min-height: 100px;
+    min-height: 120px;
   }
 
   &__button {
-    padding: 10px 16px;
+    padding: var(--space-s) var(--space-m);
     background: #1a4fbf;
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-  }
+    font-size: 14px;
 
-  &__button:hover {
-    background: #163f99;
+    &:hover {
+      background: #163f99;
+    }
   }
 
   &__error {
-    padding: 10px;
+    padding: var(--space-s);
     background: #ffe5e5;
     color: #b30000;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: var(--radius-sm);
   }
 }
