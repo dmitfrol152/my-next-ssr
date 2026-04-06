@@ -1,5 +1,9 @@
-export const metadata = {
-  title: "About codevolution",
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "About codevolution",
+  },
 };
 
 export default function About() {
